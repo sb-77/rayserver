@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 import os
+from pathlib import Path
 
 # json file을 읽기 위해 json module을 import 합니다.
 import json
@@ -20,7 +21,7 @@ from django.core.exceptions import ImproperlyConfigured
 # 기존에 있던 BASE_DIR입니다. 아래 secret_file을 불러올 때
 # 사용하기 때문에 BASE_DIR을 먼저 설정해줍니다.
 
-BASE_DIR = PATH(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 # 만들어두었던 json 파일을 불러옵니다.
 secret_file = os.path.join(BASE_DIR,'secrets.json')
@@ -108,8 +109,12 @@ WSGI_APPLICATION = 'setting.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'raydb',
+        'USER': 'root',
+        'PASSWORD': '1234',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 
